@@ -1,25 +1,38 @@
 'use strict';
 
-function first () {
-	setTimeout(function() {
-		console.log(1);
-	}, 500)
+const options = {
+	name: 'nana',
+	width: 1024,
+	height: 1024,
+	colors: {
+		border: 'black',
+		bg: 'red'
+	},
+	makeTest: function () {
+		console.log('test');
+	}
 }
 
-function second() {
-	console.log(2);
-}
+const {border, bg} = options.colors;
+console.log(border);//destrucure
 
-first();
-second();
+// options.makeTest();
 
+// console.log(Object.keys(options).length);// получение элементов в массиве
 
-function learnJS(lang, callback) {
-	console.log(`i learn ${lang}`);
-	callback();
-}
-function done() {
-	console.log('i pass');
-}
+// let counter = 0;
 
-learnJS('JS', done);
+// for (let key in options) {
+// 	if (typeof (options[key]) === 'object') {
+
+// 			for (let i in options[key]) {
+// 				console.log(`property ${i} have ${options[key][i]}`);
+// 				counter++;
+// 			}
+// 		} else {
+// 			console.log(`property ${key} have ${options[key]}`)
+// 			counter++;
+// 		}
+
+// 	}
+// 	console.log(counter);
