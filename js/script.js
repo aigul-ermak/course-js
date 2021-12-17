@@ -1,38 +1,21 @@
 'use strict';
 
-const options = {
-	name: 'nana',
-	width: 1024,
-	height: 1024,
-	colors: {
-		border: 'black',
-		bg: 'red'
-	},
-	makeTest: function () {
-		console.log('test');
-	}
-}
+const arr = [1, 2, 3, 4, 5];
 
-const {border, bg} = options.colors;
-console.log(border);//destrucure
+arr.forEach((element, i, arr) => {
+console.log(` ${i}: ${element} in ${arr}`);
+});
 
-// options.makeTest();
 
-// console.log(Object.keys(options).length);// получение элементов в массиве
+// arr.pop();
+// arr.push(10)
 
-// let counter = 0;
+// console.log(arr);
 
-// for (let key in options) {
-// 	if (typeof (options[key]) === 'object') {
+// for (let i = 0; i < arr.length; i ++) {
+// 	console.log(arr[i]);
+// }
 
-// 			for (let i in options[key]) {
-// 				console.log(`property ${i} have ${options[key][i]}`);
-// 				counter++;
-// 			}
-// 		} else {
-// 			console.log(`property ${key} have ${options[key]}`)
-// 			counter++;
-// 		}
-
-// 	}
-// 	console.log(counter);
+// for( let value of arr) {
+// 	console.log(value);
+// }
