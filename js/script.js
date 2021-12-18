@@ -1,76 +1,24 @@
 'use strict';
 
-// let a = 5;
-// b = a;
+let str = 'some';
+let strObj = new String(str);
+console.log(str);
+console.log(strObj);
+console.dir([1, 2, 3]);
 
-// b = b + 5;
+const soldier = {
+	health: 400,
+	armor: 100,
+	sayHello: function() {
+		console.log('Hello')
+	}
+};
 
-// console.log(b);
-// console.log(a);
-
-// const obj = {
-// 	a: 5,
-// 	b: 1
+const john = Object.create(soldier);//мы создаем новый объект John который будет наследоваться от солдата
+// const john = {
+// 	health: 100
 // }
-
-// const copy = obj;
-
-// copy.a = 10;
-
-// console.log(copy);
-// console.log(obj);
-
-// function copy(mainObj) {
-// 	let objCopy = {};
-// 	let key;
-// 	for (key in mainObj) {
-// 		objCopy[key] = mainObj[key];
-// 	}
-// 	return objCopy;
-// }
-
-// const numbers = {
-// 	a: 2,
-// 	b: 3,
-// 	c: {
-// 		x: 7,
-// 		y: 10
-// 	}
-// }
-
-// const newNumbers = copy(numbers);
-// newNumbers.a = 10;
-// newNumbers.c.x = 15;
-
-// console.log(newNumbers);
-// console.log(numbers);
-
-// const add = {
-// 	d: 17,
-// 	i: 20
-// }
-
-// console.log(Object.assign(numbers, add));
-
-// const oldArrat = ['a', 'b', 'c'];
-// const newArray = oldArrat.slice();
-// newArray[1] [ 'jkhfk']
-// console.log(oldArrat);
-// console.log(newArray);
-
-function log(a, b, c) {
-	console.log(a);
-	console.log(b);
-	console.log(c);
-}
-
-const num = [2, 5, 7];
-
-log(...num);
-
-const array = ['a', 'b'];
-
-const newArr = [...array];
-
-console.log(newArr);
-
+// john.__proto__ = soldier
+// Object.setPrototypeOf(john, soldier);\
+// console.log(john.armor.sayHello);
+john.sayHello(); 
