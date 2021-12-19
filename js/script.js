@@ -1,43 +1,23 @@
 'use strict';
 
-//to String
+const box = document.getElementById('box');
+console.log(box);
 
-//1
-console.log(typeof(String(null)));
+const btns = document.getElementsByTagName('button');
+console.log(btns[1]);
 
-console.log(typeof(null +''));
+const circles = document.getElementsByClassName('circle');
+console.log(circles);
 
-console.log(typeof(null));
+const hearts = document.querySelectorAll('.heart');
 
-const num = 5;
+hearts.forEach(item => {
+	console.log(item);
+})
+// console.log(hearts);
 
-// console.log('https://vk.com/catalog/' + num);
+const oneHeart = document.querySelector('.heart');
+console.log(oneHeart);
 
-const fontSize = 26 + 'px';
-//to Number
-//1
-console.log(typeof(Number('4')));
-//2
-console.log(typeof(+('4')));
-//3
-console.log(typeof(parseInt('15px','4')));
-
-let answer = +prompt('Hello', '');
-
-//to boolean
-
-0, '', null, undefined, NaN // false
-
-let switcher = null;//false
-if(switcher) {
-	console.log('work');
-} 
-
-let switcher = 1;//true
-if(switcher) {
-	console.log('work');
-}
-
-console.log(typeof(Boolean('4')));//boolean
-
-console.log(typeof(!!"454545"));// boolean
+const btn = document.querySelector('button');
+console.log(btn);
