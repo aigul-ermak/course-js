@@ -1,85 +1,29 @@
 'use strict';
 
-const btns = document.querySelectorAll('button'),
-	overlay = document.querySelector('.overlay');
+// 'use strict';
 
-	btns.forEach(item => {
-		item.addEventListener('click', function() {
-			console.log('click');
-		}, {once: true})
-	})
+// console.log(document.body);
+// console.log(document.documentElement);
 
+//console.log(document.body.childNodes);//позволяет получить все ноды и все узлы внутри этого родителя
+// console.log(document.body.firstChild);
+// console.log(document.body.lastChild);
 
-// const deleteElement = (e) => {
-// 	console.log(e.target);
-// }
+// console.log(document.querySelector('#current').parentNode);// получилть родителя этого элемента
+// console.log(document.querySelector('#current').parentNode.parentNode);
 
-// btn.addEventListener('click', deleteElement);
-// overlay.addEventListener('click', deleteElement);
+// console.log(document.querySelector('[data-current="3"]').previousSibling);// получаем текстовые ноды
 
-// const link = document.querySelector('a');
+// console.log(document.querySelector('[data-current="3"]').nextElementSibling);//получаю именно элемент а не ноду
 
-// link.addEventListener('click', function(event) {
-// 	event.preventDefault();// не переходим по ссылке
+// console.log(document.querySelector('#current').parentElement);
 
-// 	console.log(event.target);
-// })
+// console.log(document.body.firstElementChild);
+// console.log(document.body.lastElementChild);
 
-// let i = 0;
-// const deleteElement = (e) => {
-// 	console.log(e.target);
-// 	i++;
-// 	if (i == 1) {
-// 		btn.removeEventListener('click', deleteElement);
-// 	}
-// }
-
-// btn.addEventListener('click', deleteElement);
-
-
-
-
-
-// const deleteElement = (e) => {
-// 	e.target.remove();
-// }
-
-// btn.addEventListener('click', deleteElement);
-
-// btn.removeEventListener('click', deleteElement);
-
-// btn.addEventListener('click', function (e) {
-// 		console.log(e.target);
-// 		e.target.remove()
-// 		// console.log('hover');
-// 		});
-
-
-
-// btn.addEventListener('mouseenter', function (e) {
-// 	console.log(e.target);
-// 	e.target.remove()
-// 	// console.log('hover');
-// 	});
-
-
-
-// btn.addEventListener('mouseenter', function () {
-// console.log('hover');
-// });
-
-// btn.addEventListener('click', function () {
-// 	alert('clickkckkck');
-// })
-
-// btn.addEventListener('click', function () {
-// 	alert('second clickkckkck');
-// })
-
-// btn.onclick = function () {
-// 	alert('clickkk')
-// }
-
-// btn.onclick = function () {
-// 	alert('second clickkk')
-// }
+for (let node of document.body.childNodes) {
+	if (node.nodeName == '#text') {
+		continue;
+	}
+	console.log(node);// перебрал и оставил только элементы а не текстовые ноды
+}
