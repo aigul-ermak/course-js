@@ -1,53 +1,54 @@
+/* Задания на урок:
+
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
+
+2) Изменить жанр фильма, поменять "комедия" на "драма"
+
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
+
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
+
+5) Добавить нумерацию выведенных фильмов */
+
 'use strict';
 
-const box = document.getElementById('box'),
-	btns = document.getElementsByTagName('button'),
-	circles = document.getElementsByClassName('circle'),
-	wrapper = document.querySelector('.wrapper'),
-	hearts = wrapper.querySelectorAll('.heart'),
-	btn = document.querySelector('button');
+const movieDB = {
+	movies: [
+		"Логан",
+		"Лига справедливости",
+		"Ла-ла лэнд",
+		"Одержимость",
+		"Скотт Пилигрим против..."
+	]
+};
+
+const adv = document.querySelectorAll('.promo__adv img'),
+	poster = document.querySelector('.promo__bg'),
+	genre = poster.querySelector('.promo__genre'),
+	movieList = document.querySelector('.promo__interactive-list');
 
 
-	// box.style.backgroundColor = 'blue';
-	// box.style.width = '500px';
 
-	box.style.cssText = `background-color: blue; width: 500px`;
-
-btns[1].style.borderRadius = '100%';
-circles[0].style.backgroundColor = 'red';
-
-for(let i = 0; i < hearts.length; i ++) {
-	hearts[i].style.backgroundColor = 'blue';
-}
-
-hearts.forEach(item => {
-	item.style.backgroundColor = 'blue';
+adv.forEach(item => {
+	item.remove();
 });
 
-const div = document.createElement('div');
-// const text = document.createTextNode('Text Text')
+genre.textContent = 'Драма';
 
-div.classList.add('black');
+poster.style.backgroundImage = 'url("./img/bg.jpg")';
 
-// document.body.append(div);
-// wrapper.append(div);
-wrapper.appendChild(div);
-// wrapper.prepend(div);
+movieList.innerHTML = "";
 
-// wrapper.insertBefore(div, hearts[2]);
+movieDB.movies.sort();
 
-// hearts[0].before(div);
-// hearts[0].after(div);
+// console.log(poster.innerHTML);
 
-// circles[0].remove();
-// wrapper.removeChild(hearts[1]);
-
-
-// hearts[0].replaceWith(circles[0]);
-wrapper.replaceChild(circles[0], hearts[0]);
-
-div.innerHTML = "<h1>Hello</h1>";
-
-// div.textContent = "Hi!"//only text
-
-div.insertAdjacentHTML('beforeend', '<h2>Good day!</h2>')
+movieDB.movies.forEach((film, i) => {
+	movieList.innerHTML += `
+	<li class="promo__interactive-item">${i + 1} ${film}
+	<div class="delete"></div>
+	</li>
+`;
+})
