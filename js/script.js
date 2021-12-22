@@ -1,28 +1,18 @@
-// 'use strict';
+'use strict';
 
-//touchstart
-//touchmove
-//touchenter
-//touchleave
-//touchcancel
+const p = document.querySelectorAll('.box');
+console.log(p);
 
-window.addEventListener('DOMContentLoaded', () => {
+const script = document.createElement('script');
+script.src = 'js/script.js';
+script.async = false;
+document.body.append(script);
 
-	const box = document.querySelector('.box');
+function loadScript(src) {
+	const script = document.createElement('script');
+	script.src = src;
+	script.async = false;//будет работать по очереди
+	document.body.append(script);
+}
 
-	box.addEventListener('touchstart', (e) => {
-		e.preventDefault();
-		console.log('start');
-		console.log(e.touches);
-	})
-
-	// box.addEventListener('touchmove', (e) => {
-	// 	e.preventDefault();
-	// 	console.log('move');
-	// })
-
-})
-
-//touches сколько пальцев
-//targetTouches
-//changedTouches
+loadScript('js/script.js');
