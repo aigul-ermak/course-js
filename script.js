@@ -1,42 +1,26 @@
-const btn = document.querySelector('.btn')
-let timerId,
-	i = 0;
+'use strict';
 
-function myAnimation() {
-	const elem = document.querySelector('.box');
-	let pos = 0;
+const now = new Date('2020-05-01');
+// new Date.parse('2020-05-01');
 
-	const id = setInterval(frame, 10);
 
-	function frame() {
-		if (pos == 300) {
-			clearInterval(id);
-		} else {
-			pos++;
-			elem.style.top = pos + 'px';
-			elem.style.left = pos + 'px';
-		}
-	}
+// console.log(now.setHours(18));
+// console.log(now);
+
+// console.log(now.getFullYear());
+// console.log(now.getMonth());
+// console.log(now.getDate());
+// console.log(now.getDay());
+
+// console.log(now.getTimezoneOffset());// разница медлу часовым поясом и UTC
+// console.log(now.getTime());
+
+let start = new Date();
+
+for (let i = 0; i < 100000; i ++) {
+	let some = i ** 3;
 }
 
-btn.addEventListener('click', myAnimation);
+let end = new Date();
 
-// btn.addEventListener('click', () => {
-// 	timerId = setInterval(logger, 500);
-// 	// const timerId = setTimeout(logger, 2000);
-// });
-//когда передаем в переменную мы записываем числовой идентификатор этого таймера
-//чтобы четко определять
-// function logger() {
-// 	if (i === 3) {
-// 		clearInterval(timerId);
-// 	}
-// 	console.log('Hi!');
-// 	i++;
-// }
-//рекурсивный вызов setTimeout
-
-// const id = setTimeout(function log() {
-// 	console.log('Hi');
-// 	id = setTimeout(log, 500)
-// }, 500)
+alert(`work ${end - start}`)
