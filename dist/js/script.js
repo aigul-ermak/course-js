@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 // window.addEventListener('DOMContentLoaded', () => {
 // 	//tabs
@@ -167,7 +167,7 @@
 // 			} else {
 // 				this.classes.forEach(className => element.classList.add(className));
 // 			}
-			
+
 // 			element.innerHTML = `			
 // 			<img src=${this.src} alt=${this.alt}>
 // 			<h3 class="menu__item-subtitle">${this.title}</h3>
@@ -189,7 +189,7 @@
 // 		"Меню 'Фитнес' - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!",
 // 		9,
 // 		'.menu .container',
-		
+
 // 	).render();
 
 // 	new MenuCard(
@@ -199,7 +199,7 @@
 // 		'В меню "Премиум" мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
 // 		15,
 // 		'.menu .container',
-		
+
 // 	).render();
 
 // 	new MenuCard(
@@ -209,25 +209,42 @@
 // 		'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
 // 		25,
 // 		'.menu .container',
-		
+
 // 	).render();
 
 // });
 
-const persone = {
-	name: 'Alex',
-	tel: '+74444444',
-	parents: {
-		age: 32,
-		mom: 'Olga',
-		dad: 'Papa'
-	}
-}
+const inputRub = document.querySelector('#rub'),
+	inputUsd = document.querySelector('#usd');
 
-// console.log(JSON.parse(JSON.stringify(persone)));//получаем обычный объект
+inputRub.addEventListener('input', () => {
+	const request = new XMLHttpRequest();
 
+	request.open('GET', 'js/current.json'); //собирает настройки method, url, async, login, password
+	request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+	request.send();
 
-const clone = JSON.parse(JSON.stringify(persone));
-clone.parents.mom = "Sara";
-console.log(clone);
-console.log(persone);
+	// request.addEventListener('readystatechange', () => {//load =когда запрос готов
+	// 	if (request.readyState === 4 && request.status === 200) {
+	// 		console.log(request.response);
+	// 		const data = JSON.parse(request.response);
+	// 		inputUsd.value = (+inputRub.value / data.current.usd).toFixed(2);//взять значение из inputRub
+	// 	} else {
+	// 		inputUsd.value ='try later'
+	// 	}
+	// }) //отслеживает событие отслеживает статус нашего запроса в данный текущий момент
+
+	request.addEventListener('load', () => {//load = когда запрос готов
+		if (request.status === 200) {		
+			const data = JSON.parse(request.response);
+			inputUsd.value = (+inputRub.value / data.current.usd).toFixed(2);//взять значение из inputRub
+		} else {
+			inputUsd.value ='try later'
+		}
+	})
+
+	//status
+	//statusText
+	//responce ответ от сервера
+	//readyState
+})
