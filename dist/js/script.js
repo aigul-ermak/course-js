@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 window.addEventListener('DOMContentLoaded', () => {
 	//tabs
@@ -199,45 +199,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-	// getResource('http://localhost:3000/menu')
-	// .then(data => {
-	// 	data.forEach(({img, altimg, title, descr, price}) => {
-	// 		new MenuCard(img, altimg, title, descr, price,'.menu .container').render();
-	// 	});
-	// });
-
-	// getResource('http://localhost:3000/menu')
-	// 	.then(data => createCard(data));
-
-	// function createCard(data) {
-	// 	data.forEach(({
-	// 		img,
-	// 		altimg,
-	// 		title,
-	// 		descr,
-	// 		price
-	// 	}) => {
-	// 		const element = document.createElement('div');
-	// 		price = price * 27;
-	// 		element.classList.add('menu__item');
-
-	// 		element.innerHTML = `
-	// 		<div class="menu__item">
-	// 		<img src=${img} alt=${altimg}>
-	// 		<h3 class="menu__item-subtitle">${title}</h3>
-	// 		<div class="menu__item-descr">${descr}</div>
-	// 		<div class="menu__item-divider"></div>
-	// 		<div class="menu__item-price">
-	// 				<div class="menu__item-cost">Цена:</div>
-	// 				<div class="menu__item-total"><span>${price}</span> грн/день</div>
-	// 		</div>
-	//     </div>
-	// 		`;
-	// 		document.querySelector('.menu .container').append(element);
-
-	// 	})
-	// }
-
 	//forms
 
 	const forms = document.querySelectorAll('form');
@@ -280,16 +241,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-			postData(' http://localhost:3000/requests', json)
+			postData('http://localhost:3000/requests', json)
 				.then(data => {
-					console.log(data);
 					showThanksModal(message.success);
 					statusMessage.remove();
 				}).catch(() => {
 					showThanksModal(message.failure);
 				}).finally(() => {
 					form.reset();
-				})
+				});
 		});
 	}
 
@@ -327,6 +287,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	//slider
 
 	const sliders = document.querySelectorAll('.offer__slide'),
+		slider = document.querySelector('.offer__slider'),
 		prev = document.querySelector('.offer__slider-prev'),
 		next = document.querySelector('.offer__slider-next'),
 		total = document.querySelector('#total'),
@@ -358,6 +319,50 @@ window.addEventListener('DOMContentLoaded', () => {
 		slide.style.width = width;
 	})
 
+	slider.style.position = "relative";
+
+	const indicators = document.createElement('ol'),
+		dots = [];
+	indicators.classList.add('carousel-indicators');
+	indicators.style.cssText = `
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 15;
+	display: flex;
+	justify-content: center;
+	margin-right: 15%;
+	margin-left: 15%;
+	list-style: none;
+	`;
+	slider.append(indicators);
+
+	for (let i = 0; i < sliders.length; i++) {
+		const dot = document.createElement('li');
+		dot.setAttribute('data-slide-to', i + 1);
+		dot.style.cssText = `
+		box-sizing: content-box;
+		flex: 0 1 auto;
+		width: 30px;
+		height: 6px;
+		margin-right: 3px;
+		margin-left: 3px;
+		cursor: pointer;
+		background-color: #fff;
+		background-clip: padding-box;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		opacity: .5;
+		transition: opacity .6s ease;
+		`;
+		if (i = 0) {
+			dot.style.opacity = 1;
+		}
+		indicators.append(dot);
+		dots.push(dot);
+	}
+
 	next.addEventListener('click', () => {
 		if (offset == (+width.slice(0, width.length - 2) * (sliders.length - 1))) {
 			offset = 0;
@@ -377,6 +382,10 @@ window.addEventListener('DOMContentLoaded', () => {
 		} else {
 			current.textContent = sliderIndex;
 		}
+
+		dots.forEach(dot => dot.style.opasity = '.5');
+		dots[sliderIndex - 1].style.opacity = 1;
+
 	});
 
 	prev.addEventListener('click', () => {
@@ -398,6 +407,30 @@ window.addEventListener('DOMContentLoaded', () => {
 		} else {
 			current.textContent = sliderIndex;
 		}
+
+		dots.forEach(dot => dot.style.opasity = '.5');
+		dots[sliderIndex - 1].style.opacity = 1;
+
 	});
-	
+
+	dots.forEach(dot => {
+		dot.addEventListener('click', () => {
+			const slideTo = e.target.getAttribute('data-slide-to');
+
+			sliderIndex = slideTo;
+			offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+
+			slidesFields.style.transform = `translateX(-${offset}px)`;
+
+			if (sliders.length < 10) {
+				current.textContent = `0${sliderIndex}`
+			} else {
+				current.textContent = sliderIndex;
+			}
+
+			dots.forEach(dot => dot.style.opasity = '.5');
+			dots[sliderIndex - 1].style.opacity = 1;
+		})
+	})
+
 })
