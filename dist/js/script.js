@@ -19,10 +19,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-
-
-
-
 	function showTabContent(i = 0) {
 		tabsContent[i].classList.add('show', 'fade');
 		tabsContent[i].classList.remove('hide');
@@ -328,4 +324,54 @@ window.addEventListener('DOMContentLoaded', () => {
 	fetch('http://localhost:3000/menu')
 		.then(data => data.json())
 		.then(res => console.log(res));
+
+		//slider
+
+		const sliders = document.querySelectorAll('.offer__slide'),
+		prev = document.querySelector('.offer__slider-prev'),
+		next = document.querySelector('.offer__slider-next'),
+		total = document.querySelector('#total'),
+		current = document.querySelector('#current');
+
+		let sliderIndex = 1;
+
+		showSliders(sliderIndex);
+
+		if (sliders.length < 10) {
+			total.textContent = `0${sliders.length}`
+		} else {
+			total.textContent = sliders.length;
+		}
+
+		function showSliders(n) {
+			if (n > sliders.length) {
+				sliderIndex = 1;
+			}
+
+			if (n < 1) {
+				sliderIndex = slides.length;
+			}
+
+			sliders.forEach(item => item.style.display = 'none');
+			sliders[sliderIndex - 1].style.display = 'block';
+
+			if (sliders.length < 10) {
+				current.textContent = `0${sliderIndex}`
+			} else {
+				total.textContent = sliderIndex;
+			}
+
+		}
+
+		function plusSliders(n) {
+			showSliders(sliderIndex += n);
+		}
+
+		prev.addEventListener('click', () => {
+			plusSliders(-1)
+		});
+
+		next.addEventListener('click', () => {
+			plusSliders(1)
+		})
 })
