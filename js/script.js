@@ -546,18 +546,69 @@
 
 'use strict';
 
-const person = {
-	name: 'Alex',
-	age: 35,
+// function User(name, age) {
+// 	this.name = name;
+// 	let userAge = age;
 
-	get userAge() {
-		return this.age;
-	},
+// 	this.say = function () {
+// 		console.log(`User name is ${this.name}, age is ${userAge}`);
+// 	};
 
-	set userAge(num) {
-		this.age = num;
+// 	this.getAge = function () {
+// 		return userAge;
+// 	}
+
+// 	this.setAge = function (age) {
+// 		if (typeof age === 'number' && age > 0 && age < 110) {
+// 			userAge = age;
+// 		} else {
+// 			console.log('Error');
+// 		}
+// 	}
+// }
+
+// const ivan = new User('Ivan', 27);
+// console.log(ivan.name);
+// console.log(ivan.getAge());
+
+
+// ivan.setAge(30);
+// ivan.setAge(300);
+// console.log(ivan.getAge());
+
+// ivan.say();
+
+
+class User {
+	constructor (name, age) {
+	this.name = name;
+	this._age = age;
 	}
-};
 
-console.log(person.userAge = 30);
-console.log(person.userAge);
+	#surname = 'Petri';
+
+	say() {
+		console.log(`User name is ${this.name} ${this.#surname }, age is ${this._age}`);
+	}
+
+	get age() {
+		return this._age;
+	}
+
+	set age(age) {
+		if (typeof age === 'number' && age > 0 && age < 110) {
+			this._age = age;
+		} else {
+			console.log('Error');
+		}
+	}
+}
+
+const ivan = new User('Ivan', 27);
+console.log(ivan.age);
+ivan.age = 99;
+console.log(ivan.age);
+console.log(ivan.surname);
+
+
+ivan.say();
